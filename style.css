@@ -1,4 +1,4 @@
-/* ========== 1. THEME COLORS (dark = default) ========== */
+/* ========== 1. THEME COLORS ========== */
 :root {
   --bg: #0e1420;
   --surface: #172033;
@@ -9,8 +9,6 @@
   --accent-text: #06202e;
   --radius: 14px;
 }
-
-/* Light mode: JS adds data-theme="light" to <html> */
 [data-theme="light"] {
   --bg: #f6f8fb;
   --surface: #ffffff;
@@ -21,210 +19,179 @@
   --accent-text: #ffffff;
 }
 
-/* ========== 2. RESET AND BASE ========== */
+/* ========== 2. RESET & BASE ========== */
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
 html { scroll-behavior: smooth; scroll-padding-top: 80px; }
-
 body {
   font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
+  background: var(--bg); color: var(--text); line-height: 1.6;
   transition: background 0.3s, color 0.3s;
 }
-
 a { color: inherit; text-decoration: none; }
 ul { list-style: none; }
-
 h1, h2, h3 { line-height: 1.2; letter-spacing: -0.02em; }
 h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); }
 h2 { font-size: clamp(1.7rem, 3.5vw, 2.4rem); margin-bottom: 0.5rem; }
 
-:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
-
 /* ========== 3. BUTTONS ========== */
 .btn {
-  display: inline-block;
-  padding: 0.8rem 1.6rem;
-  background: var(--accent);
-  color: var(--accent-text);
-  border: 2px solid var(--accent);
-  border-radius: 999px;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 0.8rem 1.6rem; background: var(--accent); color: var(--accent-text);
+  border: 2px solid var(--accent); border-radius: 999px;
+  font-weight: 600; font-size: 1rem; cursor: pointer;
   transition: transform 0.2s, opacity 0.2s;
 }
 .btn:hover { transform: translateY(-2px); opacity: 0.9; }
 .btn-outline { background: transparent; color: var(--accent); }
 .btn-small { padding: 0.45rem 1.1rem; font-size: 0.95rem; }
-
 .icon-btn {
-  width: 42px; height: 42px;
-  background: var(--surface);
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: 50%;
-  font-size: 1.1rem;
-  cursor: pointer;
+  width: 42px; height: 42px; background: var(--surface); color: var(--text);
+  border: 1px solid var(--border); border-radius: 50%;
+  font-size: 1.1rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
 }
+.icon-btn i { line-height: 0; }
 
 /* ========== 4. NAVBAR ========== */
 .navbar {
-  position: sticky; top: 0; z-index: 100;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0.9rem 5%;
-  background: var(--bg);
-  border-bottom: 1px solid transparent;
+  position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between;
+  padding: 0.9rem 5%; background: var(--bg); border-bottom: 1px solid transparent;
   transition: border-color 0.3s, box-shadow 0.3s;
 }
 .navbar.scrolled { border-color: var(--border); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); }
-
 .logo { font-size: 1.5rem; font-weight: 800; }
 .logo span { color: var(--accent); }
-
 .nav-links { display: flex; align-items: center; gap: 1.8rem; }
 .nav-links a:not(.btn) { color: var(--muted); font-weight: 500; transition: color 0.2s; }
 .nav-links a:not(.btn):hover { color: var(--text); }
-
 .nav-actions { display: flex; gap: 0.6rem; }
 .menu-btn { display: none; }
 
-/* ========== 5. HERO ========== */
-.hero {
-  padding: 6rem 5% 4rem;
-  max-width: 1100px; margin: 0 auto;
+/* ========== 5. HERO (Updated for Image) ========== */
+.hero { padding: 4rem 5% 4rem; max-width: 1200px; margin: 0 auto; }
+.hero-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 4rem;
 }
-.hero-text { max-width: 760px; }
-.hero-text p { color: var(--muted); font-size: 1.2rem; margin: 1.2rem 0 2rem; max-width: 560px; }
+.hero-text h1 { animation: slideIn 0.8s ease both; }
+.hero-text p { color: var(--muted); font-size: 1.15rem; margin: 1.2rem 0 2rem; }
 .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
-
 .hero-stats {
-  display: flex; gap: 3rem; flex-wrap: wrap;
-  margin-top: 4rem; padding-top: 2rem;
-  border-top: 1px solid var(--border);
+  display: flex; gap: 2.5rem; flex-wrap: wrap;
+  margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
 }
-.stat { font-size: 2.4rem; font-weight: 800; color: var(--accent); }
+.stat { font-size: 2.2rem; font-weight: 800; color: var(--accent); }
 .stat p { font-size: 0.95rem; font-weight: 400; color: var(--muted); }
 
-/* One page-load moment: the heading slides in */
-.hero-text h1 { animation: slideIn 0.8s ease both; }
+.hero-image-wrapper {
+  width: 100%;
+  animation: slideIn 1s ease both 0.2s;
+}
+.hero-image {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  object-fit: cover;
+}
+
 @keyframes slideIn {
   from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: none; }
 }
 
-/* ========== 6. SECTIONS AND CARDS ========== */
-.section { padding: 4.5rem 5%; max-width: 1100px; margin: 0 auto; }
+/* ========== 6. SECTIONS & CARDS (Updated for Images) ========== */
+.section { padding: 4.5rem 5%; max-width: 1200px; margin: 0 auto; }
 .section-sub { color: var(--muted); margin-bottom: 2.5rem; }
-#testimonials h2 { margin-bottom: 2rem; }
-
 .cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 2rem;
 }
 .card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.8rem;
-  transition: transform 0.25s, border-color 0.25s;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
 }
-.card:hover { transform: translateY(-5px); border-color: var(--accent); }
+.card:hover { 
+  transform: translateY(-5px); border-color: var(--accent);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+.service-img {
+  width: 100%; height: 200px; object-fit: cover;
+  border-bottom: 1px solid var(--border);
+}
+.card-content { padding: 1.8rem; }
+.card-icon { font-size: 2rem; color: var(--accent); margin-bottom: 0.8rem; line-height: 1; }
 .card h3 { margin-bottom: 0.5rem; }
 .card p { color: var(--muted); }
-.card-icon { font-size: 2rem; margin-bottom: 0.8rem; }
-
 blockquote.card footer { margin-top: 1rem; font-weight: 600; color: var(--accent); }
 
-/* Scroll reveal: JS adds .visible when the card enters the screen */
-.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s, transform 0.6s; }
-.reveal.visible { opacity: 1; transform: none; }
+/* Scroll reveal: only hidden when JS is running (html.js), so content never gets lost.
+   An animation is used (not a transition) so the card hover effect keeps working. */
+.js .reveal:not(.visible) { opacity: 0; }
+.reveal.visible { animation: rise 0.7s ease-out backwards; }
+@keyframes rise { from { opacity: 0; transform: translateY(30px); } }
 
 /* ========== 7. ABOUT ========== */
 .about { display: grid; grid-template-columns: 1.3fr 1fr; gap: 3rem; align-items: center; }
 .about-text p { color: var(--muted); margin: 1rem 0 1.5rem; }
-.checklist li { padding-left: 1.8rem; margin-bottom: 0.6rem; position: relative; }
-.checklist li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+.checklist li { display: flex; align-items: center; gap: 10px; margin-bottom: 0.6rem; }
+.checklist li i { color: var(--accent); font-weight: 700; }
 .about-box {
-  background: var(--surface);
-  border-left: 4px solid var(--accent);
-  border-radius: var(--radius);
-  padding: 2rem;
-  font-size: 1.3rem; font-style: italic;
+  background: var(--surface); border-left: 4px solid var(--accent);
+  border-radius: var(--radius); padding: 2rem; font-size: 1.3rem; font-style: italic;
 }
 
-/* ========== 8. PRICING ========== */
-.price-card { display: flex; flex-direction: column; gap: 1rem; }
-.price { font-size: 2.2rem; font-weight: 800; color: var(--text) !important; }
-.price-card ul { flex: 1; color: var(--muted); }
-.price-card li { padding: 0.35rem 0; border-bottom: 1px solid var(--border); }
-.price-card.featured { border: 2px solid var(--accent); }
-
-/* ========== 9. CONTACT FORM ========== */
+/* ========== 8. CONTACT FORM ========== */
 .contact form { max-width: 620px; }
 .field { margin-bottom: 1.3rem; }
 label { display: block; font-weight: 600; margin-bottom: 0.4rem; }
 input, textarea {
-  width: 100%;
-  padding: 0.85rem 1rem;
-  background: var(--surface);
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  font: inherit;
+  width: 100%; padding: 0.85rem 1rem; background: var(--surface);
+  color: var(--text); border: 1px solid var(--border); border-radius: 10px; font: inherit;
 }
 input:focus, textarea:focus { outline: none; border-color: var(--accent); }
-/* JS adds .invalid when a field has a mistake */
 input.invalid, textarea.invalid { border-color: #ef4444; }
 .error { display: block; min-height: 1.2rem; margin-top: 0.3rem; color: #ef4444; }
 .form-success { margin-top: 1rem; color: #22c55e; font-weight: 600; }
 
-/* ========== 10. FOOTER AND BACK-TO-TOP ========== */
+/* ========== 9. FOOTER ========== */
 .footer {
-  display: flex; flex-wrap: wrap; gap: 1rem;
-  align-items: center; justify-content: space-between;
-  padding: 2rem 5%;
-  border-top: 1px solid var(--border);
-  color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between;
+  padding: 2rem 5%; border-top: 1px solid var(--border); color: var(--muted); max-width: 1200px; margin: 0 auto;
 }
 .footer nav { display: flex; gap: 1.2rem; }
 .footer nav a:hover { color: var(--accent); }
-
 #back-to-top {
-  position: fixed; right: 1.5rem; bottom: 1.5rem;
-  opacity: 0; pointer-events: none;
-  transition: opacity 0.3s;
+  position: fixed; right: 1.5rem; bottom: 1.5rem; opacity: 0; pointer-events: none; transition: opacity 0.3s;
 }
-/* JS adds .show after the user scrolls down */
 #back-to-top.show { opacity: 1; pointer-events: auto; }
 
-/* ========== 11. RESPONSIVE (tablet and mobile) ========== */
-@media (max-width: 800px) {
-  .menu-btn { display: block; }
+/* ========== 10. RESPONSIVE ========== */
+@media (max-width: 900px) {
+  .hero-container { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-text { text-align: center; }
+  .hero-text p { margin: 1.2rem auto 2rem; }
+  .hero-buttons { justify-content: center; }
+  .hero-stats { justify-content: center; }
+  .about { grid-template-columns: 1fr; }
+}
 
+@media (max-width: 800px) {
+  .menu-btn { display: inline-flex; }
   .nav-links {
     position: absolute; top: 100%; left: 0; right: 0;
     flex-direction: column; align-items: flex-start; gap: 1.2rem;
-    padding: 1.5rem 5%;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
+    padding: 1.5rem 5%; background: var(--bg); border-bottom: 1px solid var(--border);
     display: none;
   }
-  /* JS adds .open when the hamburger is clicked */
   .nav-links.open { display: flex; }
-
-  .hero { padding-top: 3.5rem; }
-  .hero-stats { gap: 2rem; }
-  .about { grid-template-columns: 1fr; }
   .footer { flex-direction: column; align-items: flex-start; }
 }
 
-/* ========== 12. RESPECT "REDUCE MOTION" SETTING ========== */
+/* ========== 11. REDUCED MOTION ========== */
 @media (prefers-reduced-motion: reduce) {
-  * { animation: none !important; transition: none !important; }
-  .reveal { opacity: 1; transform: none; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
   html { scroll-behavior: auto; }
 }

@@ -10,15 +10,17 @@ const form = document.getElementById("contact-form");
 menuToggle.addEventListener("click", () => {
   const isOpen = navLinks.classList.toggle("open");
   menuToggle.setAttribute("aria-expanded", isOpen);
-  menuToggle.textContent = isOpen ? "✕" : "☰";
+  menuToggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+  // Update Flaticon icon (Cross when open, Burger when closed)
+  menuToggle.innerHTML = isOpen ? '<i aria-hidden="true" class="fi fi-rr-cross"></i>' : '<i aria-hidden="true" class="fi fi-rr-menu-burger"></i>';
 });
 
 // Close the menu after clicking a link
 navLinks.querySelectorAll("a").forEach((link) => {
   link.addEventListener("click", () => {
     navLinks.classList.remove("open");
-    menuToggle.setAttribute("aria-expanded", false);
-    menuToggle.textContent = "☰";
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.innerHTML = '<i aria-hidden="true" class="fi fi-rr-menu-burger"></i>';
   });
 });
 
@@ -26,10 +28,12 @@ navLinks.querySelectorAll("a").forEach((link) => {
 function applyTheme(theme) {
   if (theme === "light") {
     document.documentElement.setAttribute("data-theme", "light");
-    themeToggle.textContent = "☀️";
+    // Sun icon for light mode
+    themeToggle.innerHTML = '<i aria-hidden="true" class="fi fi-rr-sun"></i>';
   } else {
     document.documentElement.removeAttribute("data-theme");
-    themeToggle.textContent = "🌙";
+    // Moon icon for dark mode
+    themeToggle.innerHTML = '<i aria-hidden="true" class="fi fi-rr-moon-stars"></i>';
   }
 }
 
@@ -60,7 +64,7 @@ const revealObserver = new IntersectionObserver(
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add("visible");
-        revealObserver.unobserve(entry.target); // only animate once
+        revealObserver.unobserve(entry.target);
       }
     });
   },
@@ -71,7 +75,7 @@ document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el))
 /* ========== 6. ANIMATED NUMBER COUNTERS ========== */
 function runCounter(el) {
   const target = Number(el.dataset.target);
-  const duration = 1500; // milliseconds
+  const duration = 1500; 
   const start = performance.now();
 
   function update(now) {
@@ -107,7 +111,7 @@ function clearError(fieldId) {
 }
 
 form.addEventListener("submit", (event) => {
-  event.preventDefault(); // stop the page from reloading
+  event.preventDefault(); 
 
   const name = document.getElementById("name").value.trim();
   const email = document.getElementById("email").value.trim();
@@ -135,7 +139,6 @@ form.addEventListener("submit", (event) => {
   }
 
   if (valid) {
-    // No server yet, so we just show a success message.
     success.textContent = `Thanks, ${name}! We'll reply to ${email} within one working day.`;
     form.reset();
   }
